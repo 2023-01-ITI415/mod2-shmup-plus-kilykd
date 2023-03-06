@@ -8,7 +8,7 @@ public class EnemyShield : MonoBehaviour
 {
 
     [Header("Inscribed")]
-    public float health = 10f;
+    public float health = 100f;
 
     private List<EnemyShield> protectors = new List<EnemyShield>();
     private BlinkColorOnHit blinker;

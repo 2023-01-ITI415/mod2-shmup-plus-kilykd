@@ -10,10 +10,13 @@ public class Main : MonoBehaviour {
 
     [Header("Inscribed")]
     public bool spawnEnemies = true;
+    public bool spawnedBoss = false;
     public GameObject[] prefabEnemies; // Array of Enemy prefabs
     public float enemySpawnPerSecond = 0.5f; // # Enemies/second
     public float enemyInsetDefault = 1.5f; // Padding for position
     public float gameRestartDelay = 2;
+    public int enemyList = 16;
+
 
     public WeaponDefinition[] weaponDefinitions;
     public GameObject prefabPowerUp;
@@ -77,7 +80,8 @@ public class Main : MonoBehaviour {
 
 
         // Pick a random Enemy prefab to instantiate
-        int ndx = Random.Range(0, prefabEnemies.Length);
+        int ndx = Random.Range(0, enemyList);
+        //Instantiate the random enemy prefab
         GameObject go = Instantiate<GameObject>(prefabEnemies[ndx]);
 
         // Position the Enemy above the screen with a random x position
@@ -91,9 +95,17 @@ public class Main : MonoBehaviour {
         Vector3 pos = Vector3.zero;
         float xMin = -bndCheck.camWidth + enemyInset;
         float xMax = bndCheck.camWidth - enemyInset;
-        pos.x = Random.Range(xMin, xMax);
+        pos.x = Random.Range(xMin, xMax);  
         pos.y = bndCheck.camHeight + enemyInset;
         go.transform.position = pos;
+
+        //If the boss has been spawned, subtract 1 from enemyList so the boss will not spawn again
+        if(ndx == 15)
+        {
+            Debug.Log("Boss has been spawned");
+            enemyList--;
+            spawnedBoss = true;
+        }
 
         // Invoke SpawnEnemy() again
         Invoke(nameof(SpawnEnemy), 1f / enemySpawnPerSecond);
