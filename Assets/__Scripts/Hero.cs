@@ -87,6 +87,7 @@ public class Hero : MonoBehaviour {
 
         Enemy enemy = go.GetComponent<Enemy>();
         PowerUp pUp = go.GetComponent<PowerUp>();
+        ProjectileBoss projBoss = go.GetComponent<ProjectileBoss>();
 
         if(enemy != null)
         {
@@ -97,6 +98,11 @@ public class Hero : MonoBehaviour {
         {
             // If the shield was triggered by a PowerUp
             AbsorbPowerUp(pUp);
+        }
+        else if (projBoss != null)
+        {
+            //If hit by the boss projectile
+            shieldLevel = shieldLevel - 5;
         }
         else
         {
