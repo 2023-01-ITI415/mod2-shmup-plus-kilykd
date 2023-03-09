@@ -13,6 +13,12 @@ public class Enemy_4 : Enemy
     private Vector3 p0, p1; //points to move between
     private float timeStart; //Birth time for the object
 
+    public int chanceToShoot = 1;
+    public GameObject BossProjectilePrefab;
+    public float      BossProjectileSpeed = 40;
+    
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -29,12 +35,13 @@ public class Enemy_4 : Enemy
         p0 = p1; // the old end becomes the new start point
         // find a new onscreen location to move toward
         float widMinRad = bndCheck.camWidth - bndCheck.radius;
-        float hgtMinRad = bndCheck.camHeight - bndCheck.radius;
+        //float hgtMinRad = bndCheck.camHeight - bndCheck.radius;
         p1.x = Random.Range(-widMinRad, widMinRad);
-        p1.y = Random.Range(-hgtMinRad, hgtMinRad);
+        p1.y = Random.Range(28, 38);
+       // p1.y = Random.Range(hgtMinRad / 3, hgtMinRad);
 
         // Make sure that it moves to a different quadrant of the screen
-        if(p0.x * p1.x > 0 && p0.y*p1.y > 0)
+     /*   if(p0.x * p1.x > 0 && p0.y*p1.y > 0)
         {
             if (Mathf.Abs(p0.x) > Mathf.Abs(p0.y))
             {
@@ -44,7 +51,7 @@ public class Enemy_4 : Enemy
                 p1.y *= -1;
             }
         }
-
+    */
         timeStart = Time.time;
 
     }
@@ -60,6 +67,22 @@ public class Enemy_4 : Enemy
         }
         u = u - 0.15f * Mathf.Sin(u * 2 * Mathf.PI);  //add in some Sine easing
         pos = (1 - u) * p0 + u * p1;                  // simple Linear interpolation
+
+        int rand = Random.Range(0, 2000);
+        if(rand <= chanceToShoot)
+        {
+            Fire();
+        }
+    }
+
+    
+
+    void Fire()
+    {
+        GameObject projGO = Instantiate<GameObject>( BossProjectilePrefab );
+        projGO.transform.position = transform.position;
+        Rigidbody rigidB = projGO.GetComponent<Rigidbody>();
+        rigidB.velocity = Vector3.down * BossProjectileSpeed;
     }
 
     /// <summary
