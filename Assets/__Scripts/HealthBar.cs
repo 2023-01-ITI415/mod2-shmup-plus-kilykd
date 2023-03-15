@@ -12,11 +12,16 @@ public class HealthBar : MonoBehaviour
 
     public Main main;
 
-    public GameObject bossShield;
+    public GameObject bossShield;       //reference to enemy4_shield_front child of Enemy_4
+    public GameObject bossShieldLeft;   //reference to enemy4_shield_Left child of enemy4_shield_front
+    public GameObject bossShieldRight;  //reference to enemy4_shield_Right child of enemy4_shield_front
 
     private bool enabledHealthBar = false;
 
-    public float currHealth; //current health
+    public float leftHealth; //health of bossShieldLeft
+    public float rightHealth; //health of bossShieldRight
+
+    public float currHealth; //current health (leftHealth + rightHealth)
     public float maxHealth; //maximum health
 
 
@@ -34,10 +39,20 @@ public class HealthBar : MonoBehaviour
         {
             //enable the health bar
             canvas.GetComponent<Canvas>().enabled = true;
+
             //Get a reference to the enemy4_shield_front child of Enemy_4
             bossShield = main.bossEnemy.transform.GetChild(1).gameObject;
+            //Get a reference to enemy4_shield_Left child of enemy4_shield_front
+            bossShieldLeft = bossShield.transform.GetChild(0).gameObject;
+            //Get a reference to enemy4_shield_Right child of enemy4_shield_front
+            bossShieldRight = bossShield.transform.GetChild(1).gameObject;
+
+            //get the health of bossShieldLeft/Right
+            leftHealth = bossShieldLeft.GetComponent<EnemyShield>().health;
+            rightHealth = bossShieldRight.GetComponent<EnemyShield>().health;
+
             //set the max health
-            maxHealth = bossShield.GetComponent<EnemyShield>().health;
+            maxHealth = leftHealth + rightHealth;
             //Set the current health to max health
             currHealth = maxHealth;
             enabledHealthBar = true;
@@ -59,8 +74,11 @@ public class HealthBar : MonoBehaviour
 
     void UpdateHealthBar()
     {
-        //Get the health of the boss
-        currHealth = bossShield.GetComponent<EnemyShield>().health;
+        //Get the health of the left/right boss shields
+        leftHealth = bossShieldLeft.GetComponent<EnemyShield>().health;
+        rightHealth = bossShieldRight.GetComponent<EnemyShield>().health;
+        //set currHealth to the current health of the boss shields
+        currHealth = leftHealth + rightHealth;
 
         //update the healthbar 
         healthBarSlider.value = currHealth;

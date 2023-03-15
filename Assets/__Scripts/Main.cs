@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Main : MonoBehaviour {
 
@@ -11,10 +12,15 @@ public class Main : MonoBehaviour {
     [Header("Inscribed")]
     public bool spawnEnemies = true;
     public bool spawnedBoss = false;
+
+    public Text winText;
+
     public GameObject[] prefabEnemies; // Array of Enemy prefabs
+
     public float enemySpawnPerSecond = 0.5f; // # Enemies/second
     public float enemyInsetDefault = 1.5f; // Padding for position
     public float gameRestartDelay = 2;
+
     public int enemyList = 15;
     public int enemiesSpawned = 0;
 
@@ -60,6 +66,9 @@ public class Main : MonoBehaviour {
         S = this;
         // Set bndCheck to reference the BoundsCheck component on this GameObject
         bndCheck = GetComponent<BoundsCheck>();
+
+        //Disabled the winText
+        winText.GetComponent<Text>().enabled = false;
 
         // Invoke SpawnEnemy() once (in 2 seconds, based on default values)
         Invoke(nameof(SpawnEnemy), 1f / enemySpawnPerSecond);
@@ -135,10 +144,30 @@ public class Main : MonoBehaviour {
         SceneManager.LoadScene("__Scene_0");
     }
 
+    public void PlayerWin()
+    {
+        //enable winText
+        winText.GetComponent<Text>().enabled = true;
+
+        //Restart the game
+        S.DelayedRestart();
+
+    }
+
+
     static public void HERO_DIED()
     {
         S.DelayedRestart();
     }
+
+    static public void BOSS_DEFEATED()
+    {
+        S.PlayerWin();
+    }
+
+
+
+    
 
 
     ///<summary>

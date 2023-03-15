@@ -212,7 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbb696a5dd6ed450c92672971fea73ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100000
+  health: 1
 --- !u!1 &3440084670684215098
 GameObject:
   m_ObjectHideFlags: 0
@@ -589,7 +589,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbb696a5dd6ed450c92672971fea73ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  health: 1000
 --- !u!1 &5609913661129515232
 GameObject:
   m_ObjectHideFlags: 0
@@ -1088,7 +1088,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbb696a5dd6ed450c92672971fea73ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  health: 1000
 --- !u!1 &9185519998980853174
 GameObject:
   m_ObjectHideFlags: 0
@@ -1206,7 +1206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbb696a5dd6ed450c92672971fea73ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1000
+  health: 1
 --- !u!114 &3381685783179541524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1221,7 +1221,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 8
   fireRate: 0.3
-  health: 1000
+  health: 1
   score: 100
   showDamageDuration: 0.1
   powerUpDropChance: 1
