@@ -92,7 +92,10 @@ public class Hero : MonoBehaviour {
         if(enemy != null)
         {
             shieldLevel--;
-            Destroy(go);
+            if(enemy.name != "Enemy_4(Clone)")
+            {
+               Destroy(go); 
+            }
         }
         else if (pUp != null)
         {

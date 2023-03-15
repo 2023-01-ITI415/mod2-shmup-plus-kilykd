@@ -6,8 +6,6 @@ using UnityEngine.UI;
 public class HealthBar : MonoBehaviour
 {
 
-    public Canvas canvas;
-
     public Slider healthBarSlider;
 
     public Main main;
@@ -28,7 +26,8 @@ public class HealthBar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     { 
-       canvas.GetComponent<Canvas>().enabled = false;
+        //Disable the health bar until the boss is spawned
+       GameObject.Find("Canvas").transform.GetChild(0).gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -38,7 +37,7 @@ public class HealthBar : MonoBehaviour
         if(main.spawnedBoss == true && enabledHealthBar == false)
         {
             //enable the health bar
-            canvas.GetComponent<Canvas>().enabled = true;
+            GameObject.Find("Canvas").transform.GetChild(0).gameObject.SetActive(true);
 
             //Get a reference to the enemy4_shield_front child of Enemy_4
             bossShield = main.bossEnemy.transform.GetChild(1).gameObject;
@@ -67,7 +66,8 @@ public class HealthBar : MonoBehaviour
         //if boss was spawned and has been destroyed -> delete the health bar 
         else if(main.spawnedBoss == true && bossShield == null)
         {
-            Destroy(this.gameObject);
+            GameObject.Find("Canvas").transform.GetChild(0).gameObject.SetActive(false);
+            Main.BOSS_DEFEATED();
         }  
     
     }

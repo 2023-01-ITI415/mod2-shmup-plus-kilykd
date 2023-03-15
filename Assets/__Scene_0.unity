@@ -648,6 +648,7 @@ MonoBehaviour:
   gameRestartDelay: 2
   enemyList: 15
   enemiesSpawned: 0
+  enemiesForBoss: 20
   bossEnemy: {fileID: 0}
   weaponDefinitions:
   - type: 1
@@ -1551,7 +1552,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef65fb09d0e6e6f4daf8542d696eb84a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 971234607}
   healthBarSlider: {fileID: 1873188735}
   main: {fileID: 282840816}
   bossShield: {fileID: 0}

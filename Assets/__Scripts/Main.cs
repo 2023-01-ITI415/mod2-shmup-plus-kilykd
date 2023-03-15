@@ -23,6 +23,7 @@ public class Main : MonoBehaviour {
 
     public int enemyList = 15;
     public int enemiesSpawned = 0;
+    public int enemiesForBoss = 20;
 
     public GameObject bossEnemy;
 
@@ -89,9 +90,15 @@ public class Main : MonoBehaviour {
             return;
         }
 
-
         // Pick a random Enemy prefab to instantiate
         int ndx = Random.Range(0, enemyList);
+
+        //if enemiesForBoss enemies have been spawned, spawn the boss
+        if(enemiesSpawned == enemiesForBoss)
+        {
+            ndx = 15;
+        }
+
         //Instantiate the random enemy prefab
         GameObject go = Instantiate<GameObject>(prefabEnemies[ndx]);
 
@@ -119,13 +126,7 @@ public class Main : MonoBehaviour {
             spawnedBoss = true;
         }
 
-        //Once 10 enemies have spawned, add the boss to the enemyList to be spawned
-        if(enemiesSpawned == 10 )
-        {
-            enemyList++;
-        }
-        
-        //Count the enemy spawned
+        //count the spawned enemy
         enemiesSpawned++;
 
         // Invoke SpawnEnemy() again
@@ -151,7 +152,6 @@ public class Main : MonoBehaviour {
 
         //Restart the game
         S.DelayedRestart();
-
     }
 
 
