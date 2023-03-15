@@ -13,8 +13,6 @@ public class Main : MonoBehaviour {
     public bool spawnEnemies = true;
     public bool spawnedBoss = false;
 
-    public Text winText;
-
     public GameObject[] prefabEnemies; // Array of Enemy prefabs
 
     public float enemySpawnPerSecond = 0.5f; // # Enemies/second
@@ -68,8 +66,9 @@ public class Main : MonoBehaviour {
         // Set bndCheck to reference the BoundsCheck component on this GameObject
         bndCheck = GetComponent<BoundsCheck>();
 
-        //Disabled the winText
-        winText.GetComponent<Text>().enabled = false;
+        //Disabled the winText and game over text
+        GameObject.Find("Canvas").transform.GetChild(1).gameObject.SetActive(false);
+        GameObject.Find("Canvas").transform.GetChild(2).gameObject.SetActive(false);
 
         // Invoke SpawnEnemy() once (in 2 seconds, based on default values)
         Invoke(nameof(SpawnEnemy), 1f / enemySpawnPerSecond);
@@ -148,7 +147,7 @@ public class Main : MonoBehaviour {
     public void PlayerWin()
     {
         //enable winText
-        winText.GetComponent<Text>().enabled = true;
+        GameObject.Find("Canvas").transform.GetChild(1).gameObject.SetActive(true);
 
         //Restart the game
         S.DelayedRestart();
@@ -158,6 +157,7 @@ public class Main : MonoBehaviour {
     static public void HERO_DIED()
     {
         S.DelayedRestart();
+        GameObject.Find("Canvas").transform.GetChild(2).gameObject.SetActive(true);
     }
 
     static public void BOSS_DEFEATED()
