@@ -15,8 +15,10 @@ public class Main : MonoBehaviour {
     public float enemySpawnPerSecond = 0.5f; // # Enemies/second
     public float enemyInsetDefault = 1.5f; // Padding for position
     public float gameRestartDelay = 2;
-    public int enemyList = 16;
+    public int enemyList = 15;
+    public int enemiesSpawned = 0;
 
+    public GameObject bossEnemy;
 
     public WeaponDefinition[] weaponDefinitions;
     public GameObject prefabPowerUp;
@@ -103,9 +105,19 @@ public class Main : MonoBehaviour {
         if(ndx == 15)
         {
             Debug.Log("Boss has been spawned");
+            bossEnemy = go;
             enemyList--;
             spawnedBoss = true;
         }
+
+        //Once 10 enemies have spawned, add the boss to the enemyList to be spawned
+        if(enemiesSpawned == 10 )
+        {
+            enemyList++;
+        }
+        
+        //Count the enemy spawned
+        enemiesSpawned++;
 
         // Invoke SpawnEnemy() again
         Invoke(nameof(SpawnEnemy), 1f / enemySpawnPerSecond);

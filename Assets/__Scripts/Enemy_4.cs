@@ -37,6 +37,7 @@ public class Enemy_4 : Enemy
         float widMinRad = bndCheck.camWidth - bndCheck.radius;
         //float hgtMinRad = bndCheck.camHeight - bndCheck.radius;
         p1.x = Random.Range(-widMinRad, widMinRad);
+        //Changed range to keep enemy4 at the top of the screen
         p1.y = Random.Range(28, 38);
        // p1.y = Random.Range(hgtMinRad / 3, hgtMinRad);
 
@@ -76,12 +77,16 @@ public class Enemy_4 : Enemy
     }
 
     
-
+    //Fires boss projectile
     void Fire()
     {
+        //instantiate the boss projectile 
         GameObject projGO = Instantiate<GameObject>( BossProjectilePrefab );
+        //set the projectile position to the position of the enemy
         projGO.transform.position = transform.position;
+        //Get a reference to the  rigid body of the boss projectile
         Rigidbody rigidB = projGO.GetComponent<Rigidbody>();
+        //set the velocity of the projectile to move down at BossProjectileSpeed
         rigidB.velocity = Vector3.down * BossProjectileSpeed;
     }
 
