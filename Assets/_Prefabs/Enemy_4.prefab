@@ -1231,7 +1231,7 @@ MonoBehaviour:
   damageDoneTime: 0
   notifiedOfDestruction: 0
   duration: 4
-  chanceToShoot: 1
+  chanceToShoot: 2
   BossProjectilePrefab: {fileID: 1811944309517151939, guid: 6f9df410d70613e42b8d3a4863bb11d5,
     type: 3}
   BossProjectileSpeed: 50

@@ -116,11 +116,12 @@ public class Main : MonoBehaviour {
         pos.y = bndCheck.camHeight + enemyInset;
         go.transform.position = pos;
 
-        //If the boss has been spawned, subtract 1 from enemyList so the boss will not spawn again
+        //If the boss has been spawned
         if(ndx == 15)
         {
-            Debug.Log("Boss has been spawned");
+            //set bossEnemy = to the instantiated boss game object
             bossEnemy = go;
+            //Make the enemyList 1 smaller to prevent th eboss from spaawning again
             enemyList--;
             spawnedBoss = true;
         }

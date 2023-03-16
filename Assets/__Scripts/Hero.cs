@@ -105,7 +105,7 @@ public class Hero : MonoBehaviour {
         else if (projBoss != null)
         {
             //If hit by the boss projectile
-            shieldLevel = shieldLevel - 5;
+            shieldLevel = shieldLevel - 2;
         }
         else
         {
